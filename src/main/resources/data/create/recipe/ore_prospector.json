@@ -1,0 +1,20 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "equipment",
+  "pattern": ["BSLSB", "SPFPS", "CTQTC", "SHVHS", "BSDSB"],
+  "key": {
+    "B": { "item": "create:brass_block" },
+    "S": { "item": "create:brass_sheet" },
+    "L": { "item": "create:redstone_link" },
+    "P": { "item": "create:precision_mechanism" },
+    "F": { "item": "create:display_board" },
+    "C": { "item": "create:brass_casing" },
+    "T": { "item": "create:electron_tube" },
+    "Q": { "item": "create:rose_quartz_lamp" },
+    "H": { "item": "create:sturdy_sheet" },
+    "D": { "item": "create:mechanical_drill" },
+    "V": { "item": "createoreexcavation:vein_finder" }
+  },
+  "result": { "id": "create:ore_prospector", "count": 1 }
+}

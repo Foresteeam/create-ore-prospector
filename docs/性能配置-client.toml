@@ -1,0 +1,4 @@
+# 游戏实例根目录/config/create_ore_prospector-client.toml
+[client]
+# 每秒最多解析并加入 UI 的区块记录，本地缓存与服务器结果共用上限。
+maxScanChunksPerSecond = 2048

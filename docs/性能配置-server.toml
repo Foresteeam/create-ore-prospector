@@ -1,0 +1,6 @@
+# 服务器根目录/config/create_ore_prospector-server.toml
+[server]
+# 所有玩家共享的每秒最大扫描区块数量，包含缓存命中。
+maxScanChunksPerSecond = 2048
+# 0 自动选择 1～8 个工作线程，尽量预留两个逻辑核心；1～32 手动指定。重启服务器生效。
+predictionThreads = 0

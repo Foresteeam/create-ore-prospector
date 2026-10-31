@@ -1,0 +1,4 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": { "layer0": "create_ore_prospector:item/ore_prospector" }
+}

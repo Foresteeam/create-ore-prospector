@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_finder": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [{ "items": "createoreexcavation:vein_finder" }] } },
+    "has_the_recipe": { "trigger": "minecraft:recipe_unlocked", "conditions": { "recipe": "create:ore_prospector" } }
+  },
+  "requirements": [["has_finder", "has_the_recipe"]],
+  "rewards": { "recipes": ["create:ore_prospector"] }
+}

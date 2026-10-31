@@ -1,0 +1,60 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+version = mod_version
+group = 'dev.mechanicalprospector'
+base { archivesName = 'create-ore-prospector-1.21.1' }
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+repositories { mavenCentral() }
+// Optional official CDN alias for networks that cannot resolve maven.neoforged.net.
+if (providers.gradleProperty('neoForgeMirror').isPresent()) {
+    repositories.withType(MavenArtifactRepository).configureEach { repo ->
+        if (repo.url.host == 'maven.neoforged.net') {
+            repo.url = uri(providers.gradleProperty('neoForgeMirror').get() + repo.url.path)
+        }
+    }
+}
+
+neoForge {
+    enable {
+        version = project.neo_version
+        disableRecompilation = true
+    }
+    runs {
+        client {
+            client()
+            programArguments.addAll '--username', 'ProspectorTest', '--width', '1280', '--height', '800'
+            if (project.hasProperty('surveyQuickPlay')) programArguments.addAll '--quickPlaySingleplayer', 'New World'
+        }
+        server { server(); programArgument '--nogui' }
+        configureEach { logLevel = org.slf4j.event.Level.INFO }
+    }
+    mods {
+        create_ore_prospector { sourceSet sourceSets.main }
+    }
+    unitTest {
+        enable()
+        testedMod = mods.create_ore_prospector
+    }
+}
+
+dependencies {
+    implementation files('libs/createoreexcavation-1.21-1.6.8.jar', 'libs/create-1.21.1-6.0.10.jar')
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation "net.neoforged:testframework:${neo_version}"
+}
+
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.named('test', Test) { useJUnitPlatform() }
+tasks.named('jar', Jar) {
+    manifest { attributes('Implementation-Version': project.version) }
+    from('LICENSE', 'THIRD_PARTY_NOTICES.txt')
+}
+tasks.named('sourcesJar', Jar) { from('LICENSE', 'THIRD_PARTY_NOTICES.txt', 'README.md') }
